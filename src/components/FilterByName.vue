@@ -3,27 +3,30 @@
         <input 
             type="text"
             placeholder="Search by name..."
-            @keyup="filter()"
             v-model="name" />
     </div>
 </template>
 
 <script>
 import { useStore } from 'vuex';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 export default {
     setup () {
         const store = useStore();
         const name = ref('');
+        let timeOut= null;
 
-        const filter = () => {
-            store.dispatch('filterByName', name.value);
-        }
+        watch(name, (newValue) => {
+            if (timeOut) clearTimeout(timeOut);
+            if (newValue.length < 3 && newValue.length !== 0) return; // Only search if 3 or more characters.
+            timeOut = setTimeout(() => {
+                store.dispatch('filterByName', newValue);
+            }, 300);
+        });
 
         return {
             name,
-            filter
         };
     }
 }
