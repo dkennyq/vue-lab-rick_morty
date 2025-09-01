@@ -1,15 +1,23 @@
 <template>
     <div class="filter">
-        <div class="item" @click="filter('')">
+        <div class="item" 
+            :class="{ active: selectedStatus === '' }"
+            @click="filter('')">
             All
         </div>
-        <div class="item" @click="filter('Alive')">
+        <div class="item" 
+            :class="{ active: selectedStatus === 'Alive' }"
+            @click="filter('Alive')">
             Alive
         </div>
-        <div class="item" @click="filter('Dead')">
+        <div class="item"
+            :class="{ active: selectedStatus === 'Dead' }"
+            @click="filter('Dead')">
             Dead
         </div>
-        <div class="item" @click="filter('unknown')">
+        <div class="item" 
+            :class="{ active: selectedStatus === 'unknown' }"
+            @click="filter('unknown')">
             Unknown
         </div>
     </div>
@@ -17,17 +25,20 @@
 
 <script>
 import { useStore } from 'vuex';
+import { computed } from 'vue';
 
 export default {
     setup() { 
         const store = useStore();
+        const selectedStatus = computed(() => store.state.selectedStatus);
 
         const filter = ((status) => {
             store.dispatch('filterByStatus', status);
         });
         
         return {
-            filter
+            filter,
+            selectedStatus,
         };
     }
 };
@@ -50,6 +61,10 @@ export default {
         &:hover {
             color: var(--text-orange);
         }
+    }
+    .item.active {
+        color: var(--text-orange);
+        font-weight: bold;
     }
 }
 </style>

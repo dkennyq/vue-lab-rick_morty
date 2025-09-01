@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import CardCharacters from './CardCharacters.vue';
 
@@ -23,8 +23,26 @@ export default {
             return store.state.charactersFilter;
         });
 
+        const isLoading = computed(() => store.state.isLoading);
+        
+        const handleScroll = () => {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const visible = window.innerHeight;
+            const pageHeight = document.documentElement.scrollHeight;
+            
+            // When the user has scrolled to within 100px of the bottom, fetch more characters.
+            if (scrollY + visible >= pageHeight - 100 && !isLoading.value) {
+                store.dispatch('fetchNextPage');
+            }
+        }
+        
         onMounted(() => {
             store.dispatch('getCharacters');
+            window.addEventListener('scroll', handleScroll);
+        });
+
+        onUnmounted(() => {
+            window.removeEventListener('scroll', handleScroll);
         });
 
         return {
