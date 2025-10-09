@@ -4,24 +4,23 @@
         <div class="character__info">
             <h3>{{ character.name }}</h3>
             <div class="status">
-                <span
-                    :class="{
-                        'status--alive': character.status === 'Alive',
-                        'status--dead': character.status === 'Dead',
-                        'status--default': character.status === 'unknown',
-                    }">
+                <span :class="{
+                    'status--alive': character.status === 'Alive',
+                    'status--dead': character.status === 'Dead',
+                    'status--default': character.status === 'unknown',
+                }">
                 </span>
                 <span>{{ character.status }} - {{ character.species }}</span>
             </div>
             <div class="origin">
                 <span>
-                    Origin: 
+                    Origin:
                     {{ character.origin.name }}
                 </span>
             </div>
             <div class="location">
                 <span>
-                    Location: 
+                    Location:
                     {{ character.location.name }}
                 </span>
             </div>
@@ -44,26 +43,34 @@ export default {
     cursor: pointer;
     transition: transform 200ms ease-in-out;
     height: 100%;
+
     &:hover {
         transform: scale(1.05);
+
         h3 {
             color: var(--text-orange);
         }
     }
+
     span {
         color: var(--text-gray);
     }
+
     h3 {
         margin-bottom: 0.5rem;
     }
+
     &__info {
         padding: 1.5rem;
+
         .status {
             display: flex;
             align-items: center;
             margin-bottom: 0.5rem;
+
             span {
                 color: var(--text-gray);
+
                 &:first-child {
                     width: 10px;
                     height: 10px;
@@ -71,16 +78,20 @@ export default {
                     margin-right: 0.5rem;
                 }
             }
+
             .status--alive {
                 background-color: #55cc44;
             }
+
             .status--dead {
                 background-color: #d63d2e;
             }
+
             .status--default {
                 background-color: #9e9e9e;
             }
         }
+
         .origin {
             margin-bottom: 0.5rem;
         }

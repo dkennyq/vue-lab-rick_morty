@@ -1,6 +1,9 @@
+// TODO: Add app notifications.
+// TODO: Add vote system for characters.
+// TODO: Add modal for character details (show episodes, location, etc).
 <template>
   <div class="container">
-    <h1>Rick And Morty</h1>
+    <h1>Rick And Morty & Ian</h1>
     <FilterByStatus />
     <FilterByName />
     <ListCharacters />
@@ -29,25 +32,30 @@ export default {
   --text-gray: #c0c0c0;
   --text-orange: #ff9800;
 }
+
 * {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
 }
+
 body {
   background-color: var(--background-body);
   color: var(--text-white);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 h1 {
   margin-bottom: 3rem;
   text-align: center;
 }
+
 .container {
   width: 980px;
   max-width: 90%;
   margin: 5rem auto
 }
+
 img {
   width: 100%;
 }
