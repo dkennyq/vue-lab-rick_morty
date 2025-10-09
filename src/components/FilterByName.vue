@@ -19,7 +19,7 @@ export default {
 
         watch(name, (newValue) => {
             if (timeOut) clearTimeout(timeOut);
-            if (newValue.length < 3 && newValue.length !== 0) return; // Only search if 3 or more characters.
+            if (newValue.length < 3 && newValue.length !== 0) return; // Only search if 3 or more characters or empty for all.
             timeOut = setTimeout(() => {
                 store.dispatch('filterByName', newValue);
             }, 300);
